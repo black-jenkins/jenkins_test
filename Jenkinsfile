@@ -1,9 +1,9 @@
 properties([
   parameters([
-    string(defaultValue: '', description: 'Please enter the tag version for the release.', name: 'release_tag'),
-    string(defaultValue: '', description: 'Please enter the release title.', name: 'release_title'),
-    text(defaultValue: '', description: 'Please describe this release.', name: 'release_description'),
-    booleanParam(defaultValue: true, description: 'Please identify the release state. By default the release is set as a pre-release.', name: 'pre_release'),
+    string(name: 'release_tag', defaultValue: '', description: 'Please enter the tag version for the release.'),
+    string(name: 'release_title', defaultValue: '', description: 'Please enter the release title.'),
+    text(name: 'release_description', defaultValue: '', description: 'Please describe this release.'),
+    booleanParam(name: 'pre_release', defaultValue: true, description: 'Please identify the release state. By default the release is set as a pre-release.'),
   ])
 ])
 
