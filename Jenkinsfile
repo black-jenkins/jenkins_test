@@ -7,4 +7,4 @@ properties([
   ])
 ])
 
-/* Accessible then with : params.release_tag, params.release_title...  */
+/* Accessible then with : params.release_tag, params.release_title ...  */
