@@ -21,6 +21,12 @@ node {
     ]
   ]) {
     try {
+      stage 'Dump some stuff'
+      echo $GITHUB_REPO_TOKEN
+      echo $GITHUB_REPO_USER
+      echo ${params.release_tag}
+      
+      stage 'Run the github-release'
       sh '''github-release release \\
         --security-token $GITHUB_REPO_TOKEN \\
         --user $GITHUB_REPO_USER \\
@@ -29,9 +35,7 @@ node {
         --name ${params.release_title} \\
         --description ${params.release_desc} \\
         --pre-release'''
-      echo $GITHUB_REPO_TOKEN
-      echo $GITHUB_REPO_USER
-      echo ${params.release_tag}
+
     }
     catch (err) {
       throw err
