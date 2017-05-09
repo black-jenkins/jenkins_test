@@ -26,7 +26,7 @@ node {
 
       stage 'Create release'
 
-      String github_release_cmd = "${/github-release release \
+      def release_cmd = "${/github-release release \
         --security-token ${GITHUB_REPO_TOKEN} \
         --user ${GITHUB_REPO_USER} \
         --repo ${GITHUB_REPO_NAME} \
@@ -35,12 +35,14 @@ node {
         --description "${GITHUB_RELEASE_DESC}"/}"
 
       if (params.GITHUB_RELEASE_STATE) {
-        github_release_cmd.append(" --pre-release")
+        release_cmd + " --pre-release"
       }
+      
+      def github_release_cmd = '''${release_cmd}'''
       echo github_release_cmd
 
       sh 'echo ${github_release_cmd}'
-      sh '''${github_release_cmd}'''
+      sh github_release_cmd
 
       stage 'Upload file'
       sh '''github-release upload \
