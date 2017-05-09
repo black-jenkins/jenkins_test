@@ -26,8 +26,8 @@ node {
         --user ${GITHUB_REPO_USER} \
         --repo jenkins_test \
         --tag ${GITHUB_RELEASE_TAG} \
-        --name ${GITHUB_RELEASE_TITLE} \
-        --description ${GITHUB_RELEASE_DESC} \
+        --name "${GITHUB_RELEASE_TITLE}" \
+        --description "${GITHUB_RELEASE_DESC}" \
         --pre-release'''
 
     }
