@@ -22,8 +22,8 @@ node {
   ]) {
     try {
       stage 'Dump some stuff'
-      echo $GITHUB_REPO_TOKEN
-      echo $GITHUB_REPO_USER
+      echo ${env.GITHUB_REPO_TOKEN}
+      echo ${env.GITHUB_REPO_USER}
       echo ${params.release_tag}
       
       stage 'Run the github-release'
