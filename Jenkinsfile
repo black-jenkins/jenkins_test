@@ -7,4 +7,9 @@ properties([
   ])
 ])
 
+node {
+  stage 'Create tag and release'
+  echo params.release_tag
+  echo params.release_title
+}
 /* Accessible then with : params.release_tag, params.release_title ...  */
