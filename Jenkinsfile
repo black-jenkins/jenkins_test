@@ -21,13 +21,13 @@ node {
       }
 
       stage 'Run the github-release'
-      sh '''github-release release
-        --security-token ${GITHUB_REPO_TOKEN}
-        --user ${GITHUB_REPO_USER}
-        --repo jenkins_test
-        --tag ${GITHUB_RELEASE_TAG}
-        --name ${GITHUB_RELEASE_TITLE}
-        --description ${GITHUB_RELEASE_DESC}
+      sh '''github-release release \
+        --security-token ${GITHUB_REPO_TOKEN} \
+        --user ${GITHUB_REPO_USER} \
+        --repo jenkins_test \
+        --tag ${GITHUB_RELEASE_TAG} \
+        --name ${GITHUB_RELEASE_TITLE} \
+        --description ${GITHUB_RELEASE_DESC} \
         --pre-release'''
 
     }
