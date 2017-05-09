@@ -38,6 +38,8 @@ node {
         github_release_cmd.append(" --pre-release")
       }
       echo github_release_cmd
+
+      sh 'echo ${github_release_cmd}'
       sh '''${github_release_cmd}'''
 
       stage 'Upload file'
