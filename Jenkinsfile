@@ -1,4 +1,4 @@
-env.GITHUB_RELEASE_FILE_NAME = "file_upload_test"
+env.GITHUB_RELEASE_FILE_NAME = "platform.tar.gz"
 env.GITHUB_RELEASE_FILE_DESC = "This is a description of uploaded file."
 env.GITHUB_RELEASE_FILE_PATH = "/home/cabox/workspace/file_upload_test.txt"
 
@@ -25,15 +25,23 @@ node {
       }
 
       stage 'Create release'
-      sh '''github-release release \
+
+      def github_release_cmd = "'''github-release release \
         --security-token ${GITHUB_REPO_TOKEN} \
         --user ${GITHUB_REPO_USER} \
         --repo ${GITHUB_REPO_NAME} \
         --tag ${GITHUB_RELEASE_TAG} \
         --name "${GITHUB_RELEASE_TITLE}" \
-        --description "${GITHUB_RELEASE_DESC}" \
-        --pre-release'''
-        
+        --description "${GITHUB_RELEASE_DESC}""
+
+      if (params.GITHUB_RELEASE_STATE) {
+        def github_release_cmd_ending = " --pre-release'''"
+      }
+      else {
+        def github_release_cmd_ending = "'''"
+      }
+      sh ${github_release_cmd}${github_release_cmd_ending}
+
       stage 'Upload file'
       sh '''github-release upload \
         --security-token ${GITHUB_REPO_TOKEN} \
