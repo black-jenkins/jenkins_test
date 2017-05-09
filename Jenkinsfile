@@ -34,11 +34,13 @@ node {
         --name "${GITHUB_RELEASE_TITLE}" \
         --description "${GITHUB_RELEASE_DESC}"/}"
 
-      if (params.GITHUB_RELEASE_STATE) {
-        release_cmd + " --pre-release"
-      }
-      
+      def release_cmd_parameter = " --pre-release"
+
       def github_release_cmd = '''${release_cmd}'''
+      if (params.GITHUB_RELEASE_STATE) {
+        github_release_cmd = release_cmd + release_cmd_parameter
+      }
+
       echo github_release_cmd
 
       sh 'echo ${github_release_cmd}'
