@@ -1,6 +1,6 @@
 env.GITHUB_RELEASE_FILE_NAME = "file_upload_test.txt"
 env.GITHUB_RELEASE_FILE_DESC = "This is a description of uploaded file."
-env.GITHUB_RELEASE_FILE_PATH = ~/workspace/file_upload_test.txt
+env.GITHUB_RELEASE_FILE_PATH = "~/workspace/file_upload_test.txt"
 
 properties([
   parameters([
