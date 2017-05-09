@@ -35,9 +35,9 @@ node {
         --description "${GITHUB_RELEASE_DESC}"/}"
 
       if (params.GITHUB_RELEASE_STATE) {
-        github_release_cmd + " --pre-release"
+        github_release_cmd.append(" --pre-release")
       }
-
+      echo github_release_cmd
       sh '''${github_release_cmd}'''
 
       stage 'Upload file'
