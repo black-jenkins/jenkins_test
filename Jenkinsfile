@@ -1,6 +1,6 @@
 env.GITHUB_RELEASE_FILE_NAME = "file_upload_test.txt"
 env.GITHUB_RELEASE_FILE_DESC = "This is a description of uploaded file."
-env.GITHUB_RELEASE_FILE_PATH = "~/workspace/file_upload_test.txt"
+env.GITHUB_RELEASE_FILE_PATH = ~/workspace/file_upload_test.txt
 
 properties([
   parameters([
@@ -42,7 +42,7 @@ node {
         --tag ${GITHUB_RELEASE_TAG} \
         --name "${GITHUB_RELEASE_FILE_NAME}" \
         --label "${GITHUB_RELEASE_FILE_DESC}" \
-        --file "${GITHUB_RELEASE_FILE_PATH}'''
+        --file ${GITHUB_RELEASE_FILE_PATH}'''
     }
     catch (err) {
       throw err
