@@ -22,12 +22,12 @@ node {
   ]) {
     try {
       sh '''github-release release \\
-        --security-token env.GITHUB_REPO_TOKEN
-        --user env.GITHUB_REPO_USER \\
+        --security-token ${env.GITHUB_REPO_TOKEN}
+        --user ${env.GITHUB_REPO_USER} \\
         --repo jenkins_test \\
-        --tag params.release_tag \\
-        --name params.release_title \\
-        --description params.release_desc \\
+        --tag ${params.release_tag} \\
+        --name ${params.release_title} \\
+        --description ${params.release_desc} \\
         --pre-release'''
     }
     catch (err) {
