@@ -40,7 +40,7 @@ node {
       else {
         def github_release_cmd_ending = "'''"
       }
-      sh ${github_release_cmd}${github_release_cmd_ending}
+      sh github_release_cmd + github_release_cmd_ending
 
       stage 'Upload file'
       sh '''github-release upload \
