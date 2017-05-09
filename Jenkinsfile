@@ -1,3 +1,6 @@
+env.GITHUB_RELEASE_FILENAME = "file_upload_test"
+env.GITHUB_RELEASE_FILE = "~/workspace/file_upload_test.txt"
+
 properties([
   parameters([
     string(name: 'GITHUB_RELEASE_TAG', defaultValue: '', description: 'Please enter the tag version for the release.'),
@@ -20,16 +23,24 @@ node {
         println i
       }
 
-      stage 'Run the github-release'
+      stage 'Create release'
       sh '''github-release release \
         --security-token ${GITHUB_REPO_TOKEN} \
         --user ${GITHUB_REPO_USER} \
-        --repo jenkins_test \
+        --repo ${GITHUB_REPO_NAME} \
         --tag ${GITHUB_RELEASE_TAG} \
         --name "${GITHUB_RELEASE_TITLE}" \
         --description "${GITHUB_RELEASE_DESC}" \
         --pre-release'''
-
+        
+      stage 'Upload file'
+      sh '''github-release upload \
+        --security-token ${GITHUB_REPO_TOKEN} \
+        --user ${GITHUB_REPO_USER} \
+        --repo ${GITHUB_REPO_NAME} \
+        --tag ${GITHUB_RELEASE_TAG} \
+        --name "${GITHUB_RELEASE_FILENAME}" \
+        --file "${GITHUB_RELEASE_FILE}'''
     }
     catch (err) {
       throw err
