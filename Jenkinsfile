@@ -11,5 +11,29 @@ node {
   stage 'Create tag and release'
   echo params.release_tag
   echo params.release_title
+  
+  withCredentials([
+    [$class: 
+      'UsernamePasswordMultiBinding',
+      credentialsId: 'GITHUB_REPO_AUTH',
+      usernameVariable: 'GITHUB_REPO_USER',
+      passwordVariable: 'GITHUB_REPO_TOKEN'
+    ]
+  ]) {
+    try {
+      sh '''github-release release \\
+        --security-token env.GITHUB_REPO_TOKEN
+        --user env.GITHUB_REPO_USER \\
+        --repo jenkins_test \\
+        --tag params.release_tag \\
+        --name params.release_title \\
+        --description params.release_desc \\
+        --pre-release'''
+    }
+    catch (err) {
+      throw err
+    }
+  }
 }
+
 /* Accessible then with : params.release_tag, params.release_title ...  */
