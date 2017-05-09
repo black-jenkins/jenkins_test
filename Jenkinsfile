@@ -15,16 +15,21 @@ node {
   ]) {
     try {
       stage 'Dump some stuff'
+      sh 'env > env.txt' 
+      for (String i : readFile('env.txt').split("\r?\n")) {
+        println i
+      }
+      
       echo GITHUB_REPO_TOKEN
       echo GITHUB_REPO_USER
       echo params.release_tag
       
       stage 'Run the github-release'
       sh '''github-release release
-        --security-token $GITHUB_REPO_TOKEN
-        --user $GITHUB_REPO_USER
+        --security-token GITHUB_REPO_TOKEN
+        --user GITHUB_REPO_USER
         --repo jenkins_test
-        --tag ${params.release_tag}
+        --tag params.release_tag
         --name ${params.release_title}
         --description ${params.release_desc}
         --pre-release'''
