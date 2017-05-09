@@ -1,9 +1,9 @@
 properties([
   parameters([
-    string(name: 'release_tag', defaultValue: '', description: 'Please enter the tag version for the release.'),
-    string(name: 'release_title', defaultValue: '', description: 'Please enter the release title.'),
-    text(name: 'release_desc', defaultValue: '', description: 'Please describe this release.'),
-    booleanParam(name: 'pre_release', defaultValue: true, description: 'Please identify the release state. By default the release is set as a pre-release.'),
+    string(name: 'GITHUB_RELEASE_TAG', defaultValue: '', description: 'Please enter the tag version for the release.'),
+    string(name: 'GITHUB_RELEASE_TITLE', defaultValue: '', description: 'Please enter the release title.'),
+    text(name: 'GITHUB_RELEASE_DESC', defaultValue: '', description: 'Please describe this release.'),
+    booleanParam(name: 'GITHUB_RELEASE_STATE', defaultValue: true, description: 'Please identify the release state. By default the release is set as a pre-release.'),
   ])
 ])
 
@@ -19,19 +19,15 @@ node {
       for (String i : readFile('env.txt').split("\r?\n")) {
         println i
       }
-      
-      echo GITHUB_REPO_TOKEN
-      echo GITHUB_REPO_USER
-      echo params.release_tag
-      
+
       stage 'Run the github-release'
       sh '''github-release release
-        --security-token GITHUB_REPO_TOKEN
-        --user GITHUB_REPO_USER
+        --security-token ${GITHUB_REPO_TOKEN}
+        --user ${GITHUB_REPO_USER}
         --repo jenkins_test
-        --tag params.release_tag
-        --name ${params.release_title}
-        --description ${params.release_desc}
+        --tag ${GITHUB_RELEASE_TAG}
+        --name ${GITHUB_RELEASE_TITLE}
+        --description ${GITHUB_RELEASE_DESC}
         --pre-release'''
 
     }
@@ -40,5 +36,3 @@ node {
     }
   }
 }
-
-/* Accessible then with : params.release_tag, params.release_title ...  */
