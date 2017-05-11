@@ -1,4 +1,4 @@
-env.GITHUB_REPO_NAME = "jenkins-test"
+env.GITHUB_REPO_NAME = "jenkins_test"
 env.GITHUB_RELEASE_FILE_NAME = "platform.tar.gz"
 env.GITHUB_RELEASE_FILE_DESC = "This is a description of uploaded file."
 env.GITHUB_RELEASE_FILE_PATH = "/home/cabox/workspace/file_upload_test.txt"
